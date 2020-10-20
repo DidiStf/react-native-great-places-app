@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
+import { deletePlaceAction } from '../store/actions/places';
 import { selectById as selectPlaceById } from '../store/selectors/places';
+import { isAndroid } from '../helpers/platform';
 import colors from '../constants/colors';
 
+import CustomHeaderButton from '../components/HeaderButton';
 import MapPreview from '../components/MapPreview';
 
 const PlaceDetailsView = ({ navigation }) => {
+  const dispatch = useDispatch();
   const placeId = navigation.getParam('placeId');
-  const { address, imageUri, latitude, longitude } = useSelector((state) =>
-    selectPlaceById(state, { id: placeId })
-  );
-  const initialLocation = { latitude, longitude };
+  const place = useSelector((state) => selectPlaceById(state, { id: placeId }));
+  const initialLocation = {
+    latitude: place?.latitude,
+    longitude: place?.longitude,
+  };
+
+  const handleDeletePlace = useCallback(() => {
+    dispatch(deletePlaceAction(placeId));
+    navigation.goBack();
+  }, [placeId]);
 
   const handleShowMap = () => {
     navigation.navigate('Map', {
@@ -21,12 +32,16 @@ const PlaceDetailsView = ({ navigation }) => {
     });
   };
 
+  useEffect(() => {
+    navigation.setParams({ deletePlace: handleDeletePlace });
+  }, [handleDeletePlace]);
+
   return (
     <ScrollView contentContainerStyle={styles.placeDetailsView}>
-      <Image source={{ uri: imageUri }} style={styles.image} />
+      <Image source={{ uri: place?.imageUri }} style={styles.image} />
       <View style={styles.locationContainer}>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>{address}</Text>
+          <Text style={styles.address}>{place?.address}</Text>
         </View>
         <MapPreview
           location={initialLocation}
@@ -39,8 +54,23 @@ const PlaceDetailsView = ({ navigation }) => {
 };
 
 PlaceDetailsView.navigationOptions = ({ navigation }) => {
+  const handleDeletePlace = navigation.getParam('deletePlace');
+  const title = navigation.getParam('placeTitle');
   return {
-    headerTitle: navigation.getParam('placeTitle'),
+    headerTitle: title,
+    headerRight: () => {
+      const icon = isAndroid ? 'md-trash' : 'ios-trash';
+
+      return (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title='Delete Place'
+            iconName={icon}
+            onPress={handleDeletePlace}
+          />
+        </HeaderButtons>
+      );
+    },
   };
 };
 

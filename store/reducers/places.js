@@ -1,4 +1,4 @@
-import { ADD_PLACE, GET_ALL_PLACES } from '../actions/places';
+import { ADD_PLACE, DELETE_PLACE, GET_ALL_PLACES } from '../actions/places';
 import Place from '../../models/Place';
 
 const placesReducer = (state = [], action) => {
@@ -21,6 +21,10 @@ const placesReducer = (state = [], action) => {
         longitude
       );
       return [...state, newPlace];
+    }
+    case DELETE_PLACE: {
+      const id = action.payload;
+      return state.filter((place) => place.id !== id);
     }
     case GET_ALL_PLACES: {
       const initialPlaces = action.payload.places;
