@@ -1,12 +1,11 @@
 import * as FileSystem from 'expo-file-system';
 import { GOOGLE_API_KEY } from '../../env';
-import { insertPlace, fetchPlaces } from '../../database/placesDb';
+import { insertPlace, deletePlace, fetchPlaces } from '../../database/placesDb';
 
 const ACTION_KEY = 'places';
 
-//TODO: Separate the file system from theaction like the api in a different folder
-
 export const ADD_PLACE = `${ACTION_KEY}/addPlace`;
+export const DELETE_PLACE = `${ACTION_KEY}/deletePlace`;
 export const GET_ALL_PLACES = `${ACTION_KEY}/getAllPlaces`;
 
 export const addPlaceAction = (placeData) => async (dispatch) => {
@@ -50,6 +49,20 @@ export const addPlaceAction = (placeData) => async (dispatch) => {
           longitude,
         },
       },
+    });
+  } catch (error) {
+    // TODO: Add error handlers to the newPlace component
+    console.log(error);
+    throw error;
+  }
+};
+
+export const deletePlaceAction = (id) => async (dispatch) => {
+  try {
+    await deletePlace(id);
+    dispatch({
+      type: DELETE_PLACE,
+      payload: id,
     });
   } catch (error) {
     // TODO: Add error handlers to the newPlace component

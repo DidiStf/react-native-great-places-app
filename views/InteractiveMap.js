@@ -12,8 +12,9 @@ const InteractiveMapView = ({ navigation }) => {
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
   let markerCoordinates;
   const mapRegion = {
-    latitude: initialLocation ? initialLocation.latitude : 37.78,
-    longitude: initialLocation ? initialLocation.longitude : -122.43,
+    latitude: initialLocation?.latitude ?? selectedLocation?.latitude ?? 37.78,
+    longitude:
+      initialLocation?.longitude ?? selectedLocation?.longitude ?? -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -40,7 +41,7 @@ const InteractiveMapView = ({ navigation }) => {
     // TODO: Add an Alert
     if (!selectedLocation) return;
     navigation.setParams({ saveLocation: handleSavePickedLoaction });
-  }, [handleSavePickedLoaction]);
+  }, [selectedLocation, handleSavePickedLoaction]);
 
   return (
     <MapView

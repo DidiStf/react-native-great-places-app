@@ -63,7 +63,7 @@ const LocationPicker = ({ onLocationPicked, navigation }) => {
       setPickedLocation(mapPickedLocation);
       onLocationPicked(mapPickedLocation);
     }
-  }, [mapPickedLocation, onLocationPicked]);
+  }, [mapPickedLocation]);
 
   return (
     <View style={styles.locationPicker}>
