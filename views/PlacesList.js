@@ -14,6 +14,24 @@ const PlacesListView = ({ navigation }) => {
   const dispatch = useDispatch();
   const places = useSelector(selectPlaces);
 
+  const onSelectPlace = (item) => {
+    navigation.navigate('PlaceDetails', {
+      placeTitle: item.title,
+      placeId: item.id,
+    });
+  };
+
+  const renderItem = (item) => {
+    return (
+      <PlaceItem
+        imageUri={item.imageUri}
+        title={item.title}
+        address={item.address}
+        onSelect={() => onSelectPlace(item)}
+      />
+    );
+  };
+
   useEffect(() => {
     dispatch(getAllPlacesAction());
   }, [dispatch, getAllPlacesAction]);
@@ -22,22 +40,7 @@ const PlacesListView = ({ navigation }) => {
     <FlatList
       data={places}
       keyExtractor={({ id }) => id}
-      renderItem={(itemData) => {
-        const { item } = itemData;
-        return (
-          <PlaceItem
-            imageUri={item.imageUri}
-            title={item.title}
-            address={item.address}
-            onSelect={() => {
-              navigation.navigate('PlaceDetails', {
-                placeTitle: item.title,
-                placeId: item.id,
-              });
-            }}
-          />
-        );
-      }}
+      renderItem={({ item }) => renderItem(item)}
     />
   );
 };
