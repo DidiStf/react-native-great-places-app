@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "great-places-app",
-    "slug": "great-places-app",
+    "name": "Great Places",
+    "description": "Keep in your pocket an archive of the greatest places you have visited.",
+    "slug": "great-places",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/great-places-icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/great-places-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,6 +19,12 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/great-places-icon.png",
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
