@@ -72,7 +72,7 @@ const NewPlaceView = ({ navigation }) => {
 };
 
 NewPlaceView.navigationOptions = ({ navigation }) => ({
-  headerTitle: 'Add Place',
+  headerTitle: 'Add New Place',
 });
 
 const styles = StyleSheet.create({

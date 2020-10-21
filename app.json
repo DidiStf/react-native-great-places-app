@@ -18,13 +18,26 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.didistf.great-places",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/great-places-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDRd2eIH9wtqVbrbl0nXXrxIPTPUDVCARg"
+        }
+      },
+      "package": "com.didistf.great_places",
+      "versionCode": 1,
+      "permissions": [ "ACCESS_FINE_LOCATION", "CAMERA", "WRITE_EXTERNAL_STORAGE" ],
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content"
     },
     "web": {
       "favicon": "./assets/favicon.png"
