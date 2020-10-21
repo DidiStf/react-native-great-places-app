@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/great-places-icon.png",
     "splash": {
-      "image": "./assets/great-places-icon.png",
+      "image": "./assets/great-places-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -34,7 +34,7 @@
       },
       "package": "com.didistf.great_places",
       "versionCode": 1,
-      "permissions": [ "ACCESS_FINE_LOCATION", "CAMERA", "WRITE_EXTERNAL_STORAGE" ],
+      "permissions": [ "ACCESS_FINE_LOCATION", "CAMERA", "WRITE_EXTERNAL_STORAGE" ]
     },
     "androidStatusBar": {
       "barStyle": "light-content"
