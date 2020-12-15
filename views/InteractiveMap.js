@@ -12,9 +12,10 @@ const InteractiveMapView = ({ navigation }) => {
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
   let markerCoordinates;
   const mapRegion = {
-    latitude: initialLocation?.latitude ?? selectedLocation?.latitude ?? 37.78,
+    latitude:
+      initialLocation?.latitude ?? selectedLocation?.latitude ?? 43.7031,
     longitude:
-      initialLocation?.longitude ?? selectedLocation?.longitude ?? -122.43,
+      initialLocation?.longitude ?? selectedLocation?.longitude ?? 7.2661,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
